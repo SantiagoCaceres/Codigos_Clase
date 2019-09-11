@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string clave=" ";
+    string claveu;
+    int cont=0;
+    cout<<"Porfavor ingrese una clave: ";
+    cin>>clave;
+    while(true){
+        try {
+
+            for(int i=0;i<int(clave.length());i++){
+                cout<<"Ingrese el caracter #"<<i+1<<": "<<endl;
+                cin>>claveu;
+                try {
+                    if(claveu[0]!=clave[i]){
+                        throw "Dato erroneo";
+                    }
+                } catch (...) {
+                    cont++;
+                    claveu.clear();
+                    cout<<"ERROR Le quedan "<<3-cont<<" oportunidades"<<endl;
+                    if(3-cont==0){throw "Cantidad de intentos maximos";}
+                    break;
+                }
+
+            }
+            if(claveu[0]==clave[clave.length()-1]){
+                break;
+            }
+
+        }
+        catch (...) {
+            cout<<"Se ingreso incorrectamente la contraseña 3 veces, tarjeta bloqueada"<<endl;
+            exit(1);
+        }
+    }
+    cout<<"Acceso al sistema"<<endl;
+}
